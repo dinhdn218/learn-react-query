@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import menu from "./constants/menu";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Routes>
+        {menu.map((item, index) => {
+          const Element = item.component;
+          return (
+            <Route
+              key={index}
+              path={item.path}
+              element={
+                <Container className="my-4">
+                  <Element />
+                </Container>
+              }
+            />
+          );
+        })}
+      </Routes>
     </div>
   );
 }
